@@ -12,6 +12,8 @@ One card instance shows **one** media_player entity. Combine with
 [`auto-entities`](https://github.com/thomasloven/lovelace-auto-entities) to show a
 card per active player (e.g. only while `playing`/`paused`) — see example below.
 
+![demo](asset/mediaplayer-card.png)
+
 ## Options
 
 | Name | Type | Default | Description |
