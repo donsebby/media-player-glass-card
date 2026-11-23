@@ -1,6 +1,6 @@
-const CARD_VERSION = "1.0.1";
+const CARD_VERSION = "1.1.0";
 console.info(
-  "%c MEDIA-PLAYER-GLASS-CARD %c v1.0.0 ",
+  `%c MEDIA-PLAYER-GLASS-CARD %c v${CARD_VERSION} `,
   "color: white; background: #a78bfa; font-weight: 700;",
   "color: #a78bfa; background: white; font-weight: 700;"
 );
@@ -102,6 +102,50 @@ const STYLE = `
 
   .controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 16px 0; }
   ha-icon.leading { --mdc-icon-size: 18px; color: color-mix(in srgb, ${INK} 65%, transparent); flex: none; }
+
+  /* look: solid - a calm, solid panel instead of glass (opt-in, see
+     setConfig). No blur, gradients, chromatic inner edges, glows or
+     filters: flat round buttons, a plain slider without the glass lens,
+     the play button filled with the accent only while playing. Kept last
+     so these rules win over the glass rules above, which stay untouched. */
+  .card.solid {
+    background: var(--surface, color-mix(in srgb, var(--card-background-color, #1c1f28) 88%, transparent));
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    border: 1px solid rgba(255,255,255,0.06); border-radius: var(--lg-radius, 20px);
+    padding: 16px; box-shadow: none;
+  }
+  .card.solid .topbar ha-icon { color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
+  .card.solid .topbar .device-label { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
+  .card.solid .iconbox {
+    width: 44px; height: 44px; border-radius: 50%; border: none; box-shadow: none; filter: none;
+    background: color-mix(in srgb, ${INK} 14%, transparent); color: ${INK};
+    transition: background .2s ease, color .2s ease;
+  }
+  .card.solid .iconbox ha-icon { --mdc-icon-size: 22px; }
+  .card.solid .iconbox.big { width: 58px; height: 58px; }
+  .card.solid .iconbox.big ha-icon { --mdc-icon-size: 28px; }
+  .card.solid .iconbox.active { background: var(--c); color: #16181d; box-shadow: none; filter: none; }
+  .card.solid .art {
+    border: 1px solid rgba(255,255,255,0.04); border-radius: calc(var(--lg-radius, 20px) - 4px);
+    background: var(--lg-tile-bg, color-mix(in srgb, ${INK} 8%, transparent));
+  }
+  .card.solid .art .fallback {
+    border: none; box-shadow: none;
+    background: color-mix(in srgb, ${INK} 10%, transparent);
+    color: var(--secondary-text-color, rgba(255,255,255,0.6));
+  }
+  .card.solid .name { font-size: 15px; font-weight: 600; }
+  .card.solid .sub { font-size: 13px; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
+  .card.solid .time { font-size: 12px; width: 40px; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
+  /* plain slider: flat bar + fill, no lens and no glow; an invisible
+     strip above/below gives the 8px bar a ~44px tall touch target */
+  .card.solid .track::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; bottom: -18px; }
+  .card.solid .fill { box-shadow: none; }
+  .card.solid .lens { display: none; }
+  .card.solid ha-icon.leading { --mdc-icon-size: 20px; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
+  @media (prefers-reduced-motion: reduce) {
+    .card.solid .iconbox { transition: none; }
+  }
 `;
 
 function fmtTime(sec) {
@@ -119,6 +163,8 @@ class MediaPlayerGlassCard extends HTMLElement {
     this._config = config;
     this._accent = config.accent_color || DEFAULT_ACCENT;
     this._build();
+    // look: solid is opt-in; anything else keeps the glass look untouched.
+    this._cardEl.classList.toggle("solid", config.look === "solid");
     if (this._cardEl) {
       if (config.bg_opacity != null) {
         this._cardEl.style.setProperty("--bg-pct", Math.max(0, Math.min(100, 100 * config.bg_opacity)) + "%");

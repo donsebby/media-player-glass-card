@@ -23,11 +23,35 @@ card per active player (e.g. only while `playing`/`paused`) — see example belo
 | `icon` | string | `mdi:cast` | Small icon shown next to the label |
 | `accent_color` | string | `#a78bfa` | Accent used for the play button, progress fill, and volume fill |
 | `bg_opacity` | number (0–1) | `0.7` | Panel background opacity (matches `liquid-glass-tile-card-v2`'s `bg_opacity`) |
+| `look` | string | — (glass) | `solid` switches to a calm, solid panel without glass, see *Solid look*. Without it the card keeps the glass look |
 
 Controls are feature-gated against the entity's `supported_features`: transport
 buttons (prev/play-pause/next) and the volume slider are only rendered at all when
 the entity reports that capability, and the progress bar becomes non-interactive
 (but stays visible) when the entity doesn't support `SEEK`.
+
+## Solid look
+
+`look: solid` swaps the glass for a calm, solid panel, matching `look: solid` in
+`liquid-glass-tile-card-v2`:
+
+- **Panel:** solid surface from the optional CSS variable `--surface` (default: the
+  theme's card background at 88 %), a hairline border, no blur and no shadow.
+  `bg_opacity` has no effect in this look.
+- **Buttons:** flat round buttons (44 px, play/pause 58 px) without gradients,
+  inner edges or glows. Play/pause is filled with `accent_color` while playing.
+- **Sliders:** progress and volume are plain bars with an accent fill – no glass
+  lens, no glow – with a taller invisible touch area. Dragging works as before.
+- **Artwork** stays; its frame uses `--lg-tile-bg` and the inner radius.
+- Text: title 15 px, artist/series and label 13 px in the secondary text colour.
+- Transitions are switched off for `prefers-reduced-motion`.
+
+```yaml
+type: custom:media-player-glass-card
+entity: media_player.living_room
+label: Living room
+look: solid
+```
 
 ## Example: one card per currently active player
 
@@ -85,6 +109,10 @@ lg-backdrop: blur(22px) saturate(180%)   # blur/saturation behind the panel
 Without them nothing changes. Options set on the card itself (e.g. `blur`) still win.
 
 ## Changelog
+
+### 1.1.0
+- New card option `look: solid`: a calm, solid panel instead of glass (see *Solid look*). Solid surface from the optional `--surface`, flat round buttons, play/pause filled with the accent while playing, plain progress/volume sliders without the glass lens or glow, larger text (15/13 px). Without `look` the card renders exactly as before.
+- The console banner shows the actual card version.
 
 ### 1.0.1
 - Reads the optional theme variables `--lg-radius` and `--lg-backdrop` (see *Theme variables*).
