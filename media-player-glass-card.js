@@ -1,4 +1,4 @@
-const CARD_VERSION = "1.0.0";
+const CARD_VERSION = "1.0.1";
 console.info(
   "%c MEDIA-PLAYER-GLASS-CARD %c v1.0.0 ",
   "color: white; background: #a78bfa; font-weight: 700;",
@@ -23,10 +23,10 @@ const STYLE = `
   .card {
     position: relative;
     background: color-mix(in oklch, var(--card-background-color, #17181f) var(--bg-pct, 70%), transparent);
-    backdrop-filter: blur(22px) saturate(180%);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: var(--lg-backdrop, blur(22px) saturate(180%));
+    -webkit-backdrop-filter: var(--lg-backdrop, blur(22px) saturate(180%));
     border: 1px solid color-mix(in srgb, ${INK} 12%, transparent);
-    border-radius: 20px;
+    border-radius: var(--lg-radius, 20px);
     padding: 18px;
     box-shadow: 0 20px 40px -20px rgba(0,0,0,0.35), inset 0 1px 0 color-mix(in srgb, ${INK} 10%, transparent);
     box-sizing: border-box;
