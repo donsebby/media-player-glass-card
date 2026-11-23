@@ -181,7 +181,7 @@ class MediaPlayerGlassCard extends HTMLElement {
   static getStubConfig() {
     return {
       type: "custom:media-player-glass-card",
-      entity: "media_player.appletv_jellyfin_bild",
+      entity: "media_player.living_room",
       label: "Apple TV",
       icon: "mdi:apple",
     };
