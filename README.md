@@ -23,7 +23,7 @@ card per active player (e.g. only while `playing`/`paused`) — see example belo
 | `icon` | string | `mdi:cast` | Small icon shown next to the label |
 | `accent_color` | string | `#a78bfa` | Accent used for the play button, progress fill, and volume fill |
 | `bg_opacity` | number (0–1) | `0.7` | Panel background opacity (matches `liquid-glass-tile-card-v2`'s `bg_opacity`) |
-| `look` | string | — (glass) | `solid` switches to a calm, solid panel without glass, see *Solid look*. Without it the card keeps the glass look |
+| `look` | string | — (theme, else glass) | `solid` switches to a calm, solid panel without glass, see *Solid look*. `glass` forces glass. Without it the theme's `lg-look` decides, otherwise the card keeps the glass look |
 
 Controls are feature-gated against the entity's `supported_features`: transport
 buttons (prev/play-pause/next) and the volume slider are only rendered at all when
@@ -51,6 +51,16 @@ type: custom:media-player-glass-card
 entity: media_player.living_room
 label: Living room
 look: solid
+```
+
+The look can also come from your theme, for all Liquid Glass cards at once: set
+`lg-look: solid` in the Home Assistant theme (the CSS variable `--lg-look`, value
+`solid` or `glass`). `look:` on a single card overrides the theme; without either the
+card stays glass. The card picks up theme switches on its own.
+
+```yaml
+# in your Home Assistant theme
+lg-look: solid
 ```
 
 ## Example: one card per currently active player
@@ -111,6 +121,7 @@ Without them nothing changes. Options set on the card itself (e.g. `blur`) still
 ## Changelog
 
 ### 1.1.0
+- The look can come from the theme: `lg-look: solid` (CSS variable `--lg-look`) switches all Liquid Glass cards to the solid look; `look:` on the card overrides it (see *Solid look*).
 - New card option `look: solid`: a calm, solid panel instead of glass (see *Solid look*). Solid surface from the optional `--surface`, flat round buttons, play/pause filled with the accent while playing, plain progress/volume sliders without the glass lens or glow, larger text (15/13 px). Without `look` the card renders exactly as before.
 - The console banner shows the actual card version.
 
