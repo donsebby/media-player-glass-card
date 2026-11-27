@@ -1,4 +1,4 @@
-const CARD_VERSION = "1.1.0";
+const CARD_VERSION = "1.2.0";
 console.info(
   `%c MEDIA-PLAYER-GLASS-CARD %c v${CARD_VERSION} `,
   "color: white; background: #a78bfa; font-weight: 700;",
