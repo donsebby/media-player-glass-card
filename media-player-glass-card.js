@@ -110,9 +110,9 @@ const STYLE = `
      so these rules win over the glass rules above, which stay untouched. */
   .card.solid {
     background: var(--surface, color-mix(in srgb, var(--card-background-color, #1c1f28) 88%, transparent));
-    backdrop-filter: none; -webkit-backdrop-filter: none;
-    border: 1px solid rgba(255,255,255,0.06); border-radius: var(--lg-radius, 20px);
-    padding: 16px; box-shadow: none;
+    backdrop-filter: var(--lg-panel-backdrop, none); -webkit-backdrop-filter: var(--lg-panel-backdrop, none);
+    border: var(--lg-tile-edge, 1px solid rgba(255,255,255,0.06)); border-radius: var(--lg-radius, 20px);
+    padding: 16px; box-shadow: var(--lg-tile-shadow, none);
   }
   .card.solid .topbar ha-icon { color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
   .card.solid .topbar .device-label { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
