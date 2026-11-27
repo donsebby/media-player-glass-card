@@ -117,14 +117,14 @@ const STYLE = `
   .card.solid .topbar ha-icon { color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
   .card.solid .topbar .device-label { font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--secondary-text-color, rgba(255,255,255,0.6)); }
   .card.solid .iconbox {
-    width: 44px; height: 44px; border-radius: 50%; border: none; box-shadow: none; filter: none;
-    background: color-mix(in srgb, ${INK} 14%, transparent); color: ${INK};
+    width: 44px; height: 44px; border-radius: 50%; border: var(--lg-tile-edge, none); box-shadow: var(--lg-tile-shadow, none); filter: none;
+    background: color-mix(in srgb, ${INK} 14%, transparent); color: ${INK}; box-sizing: border-box;
     transition: background .2s ease, color .2s ease;
   }
   .card.solid .iconbox ha-icon { --mdc-icon-size: 22px; }
   .card.solid .iconbox.big { width: 58px; height: 58px; }
   .card.solid .iconbox.big ha-icon { --mdc-icon-size: 28px; }
-  .card.solid .iconbox.active { background: var(--c); color: #16181d; box-shadow: none; filter: none; }
+  .card.solid .iconbox.active { background: var(--c); color: #16181d; box-shadow: var(--lg-tile-shadow, none); filter: none; }
   .card.solid .art {
     border: var(--lg-tile-edge, 1px solid rgba(255,255,255,0.04)); box-shadow: var(--lg-tile-shadow, none); border-radius: calc(var(--lg-radius, 20px) - 4px);
     background: var(--lg-tile-bg, color-mix(in srgb, ${INK} 8%, transparent));
