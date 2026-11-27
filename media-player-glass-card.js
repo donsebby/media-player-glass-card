@@ -126,7 +126,7 @@ const STYLE = `
   .card.solid .iconbox.big ha-icon { --mdc-icon-size: 28px; }
   .card.solid .iconbox.active { background: var(--c); color: #16181d; box-shadow: none; filter: none; }
   .card.solid .art {
-    border: 1px solid rgba(255,255,255,0.04); border-radius: calc(var(--lg-radius, 20px) - 4px);
+    border: var(--lg-tile-edge, 1px solid rgba(255,255,255,0.04)); box-shadow: var(--lg-tile-shadow, none); border-radius: calc(var(--lg-radius, 20px) - 4px);
     background: var(--lg-tile-bg, color-mix(in srgb, ${INK} 8%, transparent));
   }
   .card.solid .art .fallback {

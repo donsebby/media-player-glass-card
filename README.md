@@ -120,6 +120,9 @@ Without them nothing changes. Options set on the card itself (e.g. `blur`) still
 
 ## Changelog
 
+### Unreleased
+- Solid look: inner surfaces take their edge and shadow from the theme (`--lg-tile-edge`, `--lg-tile-shadow`), so a glass theme can give them a light glass edge.
+
 ### 1.1.0
 - The look can come from the theme: `lg-look: solid` (CSS variable `--lg-look`) switches all Liquid Glass cards to the solid look; `look:` on the card overrides it (see *Solid look*).
 - New card option `look: solid`: a calm, solid panel instead of glass (see *Solid look*). Solid surface from the optional `--surface`, flat round buttons, play/pause filled with the accent while playing, plain progress/volume sliders without the glass lens or glow, larger text (15/13 px). Without `look` the card renders exactly as before.
